@@ -41,3 +41,4 @@ Route::get('/subject/{id}/destroy', 'SubjectController@destroy')->name('subject.
 Route::get('/result/{id}/create','MarkController@create')->name('mark.create');
 Route::post('/result/store','MarkController@store')->name('mark.store');
 Route::get('/result/{id}/show','MarkController@show')->name('mark.show');
+Route::get('/result/{id}/destroy','MarkController@destroy')->name('mark.destroy');

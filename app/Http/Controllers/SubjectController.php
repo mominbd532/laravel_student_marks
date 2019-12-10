@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Subject;
 use Illuminate\Http\Request;
+use App\DB;
 
 class SubjectController extends Controller
 {
@@ -12,6 +13,13 @@ class SubjectController extends Controller
     }
 
     public function store(Request $request){
+        $this->validate($request,[
+            'subName' =>'required|unique:subjects',
+
+        ],[
+            'subName.required'=> 'Subject name is required',
+        ]);
+
         Subject::create([
             'subName' =>request('subName'),
         ]);
@@ -29,6 +37,13 @@ class SubjectController extends Controller
     }
 
     public function update(Request $request,$id){
+        $this->validate($request,[
+            'subName' =>'required|unique:subjects',
+
+        ],[
+            'subName.required'=> 'Subject name is required',
+        ]);
+
         $subject =Subject::findOrFail($id);
         $subject->subName =request('subName');
         $subject->save();
@@ -39,6 +54,7 @@ class SubjectController extends Controller
     public function destroy($id){
         $subject =Subject::findOrFail($id);
         $subject->delete();
+        \DB::table('marks')->where('subjectId',$id)->delete();
         return redirect()->to('/subject/index')->with('message1','Subject Deleted Successfully');
 
     }

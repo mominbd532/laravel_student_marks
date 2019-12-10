@@ -17,6 +17,14 @@
 
                             </div>
 
+                            {{--Error Exception--}}
+                            @if($errors->has('subName'))
+                                <div class="error" style="color: red">
+                                    {{$errors->first('subName')}}
+                                </div>
+
+                            @endif
+
                             <button type="submit" class="btn btn-info">Update</button>
                         </form>
                     </div>

@@ -4,6 +4,18 @@
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-md-8">
+                @if(Session::has('message'))
+                    <div class="alert alert-success">
+                        {{Session::get('message')}}
+                    </div>
+
+                @endif
+                @if(Session::has('message1'))
+                    <div class="alert alert-danger">
+                        {{Session::get('message1')}}
+                    </div>
+
+                @endif
                 <div class="card">
                     <div class="card-header">Add Student Result</div>
 
@@ -36,6 +48,50 @@
                             </div>
                             <button type="submit" class="btn btn-primary">Submit</button>
                         </form>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-header">
+                        Old Result
+                    </div>
+                    <div class="card-body">
+                        <table class="table table-bordered table-striped css-serial">
+                            <thead>
+                            <tr>
+                                <th>SL</th>
+                                <th>Subject</th>
+                                <th>Marks</th>
+                                <th>Action</th>
+
+                            </tr>
+
+                            </thead>
+
+                            <tbody>
+                            @foreach($marks as $mark)
+
+
+                                <tr>
+                                    <td></td>
+                                    <td>
+                                        @foreach(App\Subject::all() as $sub)
+
+                                            {{$mark->subjectId=="$sub->id" ? "$sub->subName":""}}
+                                        @endforeach
+                                    </td>
+                                    <td>{{$mark->mark}}</td>
+                                    <td>
+                                        <a href="{{route('mark.destroy',[$mark->id])}}">
+                                            <button class="btn btn-danger">Delete</button>
+                                        </a>
+                                    </td>
+
+
+                                </tr>
+                            @endforeach
+
+                            </tbody>
+                        </table>
                     </div>
                 </div>
             </div>

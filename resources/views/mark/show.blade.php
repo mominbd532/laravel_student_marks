@@ -3,17 +3,17 @@
 @section('content')
     <div class="container">
         <div class="row justify-content-center">
-            <div class="col-md-6">
+            <div class="col-md-8">
 
                 <div class="card">
                     <div class="card-header">
 
                         <div class="row">
-                            <div class="col-md-8">
+                            <div class="col-md-10">
                                 View Result
                             </div>
-                            <div class="col-md-4">
-                                <a href="">
+                            <div class="col-md-2">
+                                <a href="{{url('/student/index')}}">
                                     <button class="btn btn-primary">Go Back</button>
                                 </a>
 
@@ -28,11 +28,13 @@
                             </div>
                             <div class="col-md-6 text-right">
                                 Class: {{$student->class}} Roll: {{$student->roll}}
-                                CGPA:
+                                CGPA:&nbsp;
+                                @if($checkCount > 0)
+                                    F&nbsp;({{$averageMarks}}%)
+                                @else
+                                    {{$averageMarks >= 80 ? "A+":($averageMarks >= 75 ? "A":($averageMarks >= 70 ? "A-":($averageMarks >= 65 ? "B+":($averageMarks >= 60 ? "B":($averageMarks >= 55 ? "B-":($averageMarks >= 50 ? "C+":($averageMarks >= 45 ? "C":($averageMarks >= 40 ? "D":"F"))))))))}}&nbsp;({{$averageMarks}}%)
+                                @endif
 
-
-
-                                 <P>{{$averageMarks}}%</P>
                             </div>
 
                         </div>

@@ -16,6 +16,13 @@
                                 <input type="text" class="form-control"   placeholder="Enter Subject Name" name="subName">
 
                             </div>
+                            {{--Error Exception--}}
+                            @if($errors->has('subName'))
+                                <div class="error" style="color: red">
+                                    {{$errors->first('subName')}}
+                                </div>
+
+                            @endif
 
 
                             <button type="submit" class="btn btn-primary">Submit</button>
